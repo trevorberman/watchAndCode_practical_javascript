@@ -59,10 +59,10 @@ const deleteTodos = arrayIndex => {
 
 // V3 Requirements
 // -------------------------------------
-// [x] It should store the todos array on an object
+// [x] Store the todos array on an object
 let todoList = {
   todos: ['item 1', 'item 2', 'item 3'],
-  // [x] That object should have a displayTodos method
+  // [x] Include a displayTodos method
   /*
   displayTodos: function () {
     console.log('My todos', this.todos)
@@ -71,10 +71,20 @@ let todoList = {
   // Refactor for ES6 method definition shorthand
   displayTodos () {
     console.log('My todos', this.todos)
+  },
+  // [x] Include an addTodo method
+  addTodo (todo) {
+    this.todos.push(todo)
+    this.displayTodos()
+  },
+  // [x] Include a changeTodo method
+  changeTodo (arrayIndex, newValue) {
+    this.todos[arrayIndex] = newValue
+    this.displayTodos()
+  },
+  // [x] Include a deleteTodo method
+  deleteTodo (arrayIndex) {
+    this.todos.splice(arrayIndex, 1)
+    this.displayTodos()
   }
-  // [] That object should have a addTodo method
 }
-
-// [] That object should have a changeTodo method
-
-// [] That object should have a deleteTodo method
