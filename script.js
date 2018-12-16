@@ -1,52 +1,59 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V1 Requirements
+// V5 Requirements
 // -------------------------------------
-// [x] It should have a place to store todos
-let todos = ['item 1', 'item 2', 'item 3']
-
-// [x] It should have a way to display todos
-// console.log('My todos: ', todos)
-
-// [x] It should have a way to add new todos
-// todos.push('item 4', 'item 5')
-
-// [x] It should have a way to change a todo
-// todos[0] = 'item 1 updated'
-
-// [x] It should have a way to delete a todo
-// todos.splice(0, 1)
-
-// V2 Requirements
-// -------------------------------------
-// [x] It should have a function to display todos
-// Refactor this function definiton with an ES6 arrow function
-/*
-function displayTodos () {
-  console.log('My todos', todos)
-}
-*/
-const displayTodos = () => console.log('My todos:', todos)
-// displayTodos()
-
-// [x] It should have a function to add todos
-const addTodo = todo => {
-  todos.push(todo)
-  // See what's happened after adding a new todo
-  displayTodos()
-}
-// addTodo()
-
-// [x] It should have a function to change todos
-// Arrow functions SHOULD NOT return assignments
-// const changeTodo = (arrayIndex, newValue) => todos[arrayIndex] = 'newValue'
-function changeTodo (arrayIndex, newValue) {
-  todos[arrayIndex] = newValue
-  displayTodos()
-}
-
-// [] It should have a function to delete todos
-const deleteTodos = arrayIndex => {
-  todos.splice(arrayIndex, 1)
-  displayTodos()
+// Store the todos array on an object
+let todoList = {
+  todos: [],
+  // Include a displayTodos method
+  // Refactored for ES6 method definition shorthand
+  displayTodos () {
+    // [x] displayTodos shows if .todos is empty
+    if (this.todos.length === 0) {
+      console.log(
+        "Your todos list is empty. Try todoList.addTodo('first todo')"
+      )
+    } else {
+      // [x] displayTodos shows .completed status
+      // [x] displayTodos shows .todoText
+      let todo = {}
+      const incomplete = '[ ] '
+      const complete = '[x] '
+      console.log('My todos')
+      for (let i = 0; i < this.todos.length; i++) {
+        todo = this.todos[i]
+        if (todo.completed === false) {
+          console.log(incomplete + todo.todoText)
+        } else {
+          console.log(complete + todo.todoText)
+        }
+      }
+    }
+  },
+  // Include an addTodo method
+  // todoList.addTodo adds objects
+  addTodo (todoText) {
+    this.todos.push({
+      todoText: todoText,
+      completed: false
+    })
+    this.displayTodos()
+  },
+  // Include a changeTodo method
+  // todoList.changeTodo changes the todoText property
+  changeTodo (arrayIndex, todoText) {
+    this.todos[arrayIndex].todoText = todoText
+    this.displayTodos()
+  },
+  // todoList.toggleCompleted changes the completed property
+  toggleCompleted (arrayIndex) {
+    let todo = this.todos[arrayIndex]
+    todo.completed = !todo.completed
+    this.displayTodos()
+  },
+  // Include a deleteTodo method
+  deleteTodo (arrayIndex) {
+    this.todos.splice(arrayIndex, 1)
+    this.displayTodos()
+  }
 }
