@@ -1,6 +1,6 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V4 Requirements
+// V5 Requirements
 // -------------------------------------
 // Store the todos array on an object
 let todoList = {
@@ -8,10 +8,30 @@ let todoList = {
   // Include a displayTodos method
   // Refactored for ES6 method definition shorthand
   displayTodos () {
-    console.log('My todos', this.todos)
+    // [x] displayTodos shows if .todos is empty
+    if (this.todos.length === 0) {
+      console.log(
+        "Your todos list is empty. Try todoList.addTodo('first todo')"
+      )
+    } else {
+      // [x] displayTodos shows .completed status
+      // [x] displayTodos shows .todoText
+      let todo = {}
+      const incomplete = '[ ] '
+      const complete = '[x] '
+      console.log('My todos')
+      for (let i = 0; i < this.todos.length; i++) {
+        todo = this.todos[i]
+        if (todo.completed === false) {
+          console.log(incomplete + todo.todoText)
+        } else {
+          console.log(complete + todo.todoText)
+        }
+      }
+    }
   },
   // Include an addTodo method
-  // [x] todoList.addTodo adds objects
+  // todoList.addTodo adds objects
   addTodo (todoText) {
     this.todos.push({
       todoText: todoText,
@@ -20,12 +40,12 @@ let todoList = {
     this.displayTodos()
   },
   // Include a changeTodo method
-  // [x] todoList.changeTodo changes the todoText property
+  // todoList.changeTodo changes the todoText property
   changeTodo (arrayIndex, todoText) {
     this.todos[arrayIndex].todoText = todoText
     this.displayTodos()
   },
-  // [x] todoList.toggleCompleted changes the completed property
+  // todoList.toggleCompleted changes the completed property
   toggleCompleted (arrayIndex) {
     let todo = this.todos[arrayIndex]
     todo.completed = !todo.completed
