@@ -1,10 +1,10 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
 // V7 Requirements
-// [] Add a 'display todos' button to the web interface.
-// [] Add a 'toggle all' button to the web interface.
-// [] Clicking 'display todos' calls todoList.displayTodos
-// [] Clicking 'toggle all' calls todoList.toggeAll
+// [x] Add a 'display todos' button to the web interface.
+// [x] Add a 'toggle all' button to the web interface.
+// [x] Clicking 'display todos' calls todoList.displayTodos
+// [x] Clicking 'toggle all' calls todoList.toggleAll
 // -------------------------------------
 
 // Store the todos array on an object
@@ -54,7 +54,7 @@ let todoList = {
     todo.completed = !todo.completed
     this.displayTodos()
   },
-  // toggels the completed property of all todos - see logic below
+  // toggles the completed property of all todos - see logic below
   toggleAll () {
     let totalTodos = this.todos.length
     let completedTodos = 0
@@ -85,3 +85,21 @@ let todoList = {
     this.displayTodos()
   }
 }
+
+// Get access to 'display todos' button
+const displayTodosButton = document.getElementById('displayTodosButton')
+
+// Call the displayTodos method when 'display todos' is clicked
+/*
+displayTodosButton.addEventListener('click', function () {
+  todoList.displayTodos()
+})
+*/
+// Refactored for ES6 arrow function expression
+displayTodosButton.addEventListener('click', () => todoList.displayTodos())
+
+// Get access to 'toggle todos' button
+const toggleAllButton = document.getElementById('toggleAllButton')
+
+// Call the toggleAll method when 'togggle all' is clicked
+toggleAllButton.addEventListener('click', () => todoList.toggleAll())
