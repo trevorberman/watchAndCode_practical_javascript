@@ -1,28 +1,26 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V6 Requirements
-// If all todos are false, make them all true
-// If some todos are true, make them all true
-// above x2 REALLY ==
-// [x] .toggleAll If all todos are true, make them all false
-// [x] .toggleAll Else make everything true
-// AKA: If ANY todos are false, make them all true
+// V7 Requirements
+// [x] Add a 'display todos' button to the web interface.
+// [x] Add a 'toggle all' button to the web interface.
+// [x] Clicking 'display todos' calls todoList.displayTodos
+// [x] Clicking 'toggle all' calls todoList.toggleAll
 // -------------------------------------
 
 // Store the todos array on an object
 let todoList = {
   todos: [],
-  // Include a displayTodos method
+  // displays todo information via object properties
   // Refactored for ES6 method definition shorthand
   displayTodos () {
-    // [x] displayTodos shows if .todos is empty
+    // shows if .todos is empty
     if (this.todos.length === 0) {
       console.log(
         "Your todos list is empty. Try todoList.addTodo('first todo')"
       )
     } else {
-      // [x] displayTodos shows .completed status
-      // [x] displayTodos shows .todoText
+      // shows completed property status
+      // shows todoText property content
       let todo = {}
       const incomplete = '[ ] '
       const complete = '[x] '
@@ -37,8 +35,7 @@ let todoList = {
       }
     }
   },
-  // Include an addTodo method
-  // todoList.addTodo adds objects
+  // adds todo objects
   addTodo (todoText) {
     this.todos.push({
       todoText: todoText,
@@ -46,18 +43,18 @@ let todoList = {
     })
     this.displayTodos()
   },
-  // Include a changeTodo method
-  // todoList.changeTodo changes the todoText property
+  // changes the todoText property
   changeTodo (arrayIndex, todoText) {
     this.todos[arrayIndex].todoText = todoText
     this.displayTodos()
   },
-  // todoList.toggleCompleted changes the completed property
+  // toggles the completed property
   toggleCompleted (arrayIndex) {
     let todo = this.todos[arrayIndex]
     todo.completed = !todo.completed
     this.displayTodos()
   },
+  // toggles the completed property of all todos - see logic below
   toggleAll () {
     let totalTodos = this.todos.length
     let completedTodos = 0
@@ -69,22 +66,40 @@ let todoList = {
       }
     }
 
-    // [x] If all todos are true, make them all false
+    // If all todos are true, make them all false
     if (completedTodos === totalTodos) {
       for (let i = 0; i < totalTodos; i++) {
         this.todos[i].completed = false
       }
     } else {
-      // [x] make all todos true
+      // Otherwise, make all todos true
       for (let i = 0; i < totalTodos; i++) {
         this.todos[i].completed = true
       }
     }
     this.displayTodos()
   },
-  // Include a deleteTodo method
+  // deletes todo objects
   deleteTodo (arrayIndex) {
     this.todos.splice(arrayIndex, 1)
     this.displayTodos()
   }
 }
+
+// Get access to 'display todos' button
+const displayTodosButton = document.getElementById('displayTodosButton')
+
+// Call the displayTodos method when 'display todos' is clicked
+/*
+displayTodosButton.addEventListener('click', function () {
+  todoList.displayTodos()
+})
+*/
+// Refactored for ES6 arrow function expression
+displayTodosButton.addEventListener('click', () => todoList.displayTodos())
+
+// Get access to 'toggle todos' button
+const toggleAllButton = document.getElementById('toggleAllButton')
+
+// Call the toggleAll method when 'togggle all' is clicked
+toggleAllButton.addEventListener('click', () => todoList.toggleAll())
