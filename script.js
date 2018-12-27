@@ -85,21 +85,3 @@ let todoList = {
     this.displayTodos()
   }
 }
-
-// Get access to 'display todos' button
-const displayTodosButton = document.getElementById('displayTodosButton')
-
-// Call the displayTodos method when 'display todos' is clicked
-/*
-displayTodosButton.addEventListener('click', function () {
-  todoList.displayTodos()
-})
-*/
-// Refactored for ES6 arrow function expression
-displayTodosButton.addEventListener('click', () => todoList.displayTodos())
-
-// Get access to 'toggle todos' button
-const toggleAllButton = document.getElementById('toggleAllButton')
-
-// Call the toggleAll method when 'togggle all' is clicked
-toggleAllButton.addEventListener('click', () => todoList.toggleAll())
