@@ -3,7 +3,7 @@
 // V8 Requirements
 // [x] Add working UI for .addTodo
 // [x] Add working UI for .changeTodo
-// [] Add working UI for .deleteTodo
+// [x] Add working UI for .deleteTodo
 // [] Add working UI for .toggleCompleted
 // -------------------------------------
 
@@ -103,7 +103,7 @@ let handlers = {
     )
     // Get revised todo from #changeTodoTextInput
     let changeTodoTextInput = document.getElementById('changeTodoTextInput')
-    // Change existing todo
+    // Change that todo
     todoList.changeTodo(
       changeTodoPositionInput.valueAsNumber,
       changeTodoTextInput.value
@@ -111,5 +111,15 @@ let handlers = {
     // Reset #changeTodoPositionInput and #changeTodoTextInput
     changeTodoPositionInput.value = ''
     changeTodoTextInput.value = ''
+  },
+  deleteTodo () {
+    // Get position of array item from #deleteTodoPositionInput
+    let deleteTodoPositionInput = document.getElementById(
+      'deleteTodoPositionInput'
+    )
+    // Delete that todo
+    todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber)
+    // Reset #deleteTodoPositionInput
+    deleteTodoPositionInput.value = ''
   }
 }
