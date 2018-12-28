@@ -10,8 +10,40 @@
   <body>
     <h1>Get things done while you learn. Win-win!</h1>
     <h2>Todo List</h2>
-    <button onclick="todoList.displayTodos()">Display todos</button>
-    <button onclick="todoList.toggleAll()">Toggle all</button>
+
+    <div>
+      <button onclick="todoList.displayTodos()">Display todos</button>
+      <button onclick="todoList.toggleAll()">Toggle all</button>
+    </div>
+
+    <div>
+      <input
+        type="text"
+        id="addTodoTextInput"
+        name="addTodoTextInput"
+        placeholder="Your next todo"
+        maxlength="80"
+        minlength="2"
+      />
+      <button onclick="handlers.addTodo()">Add</button>
+    </div>
+
+    <div>
+      <input
+        type="number"
+        id="changeTodoPositionInput"
+        name="changeTodoPositionInput"
+      />
+      <input
+        type="text"
+        id="changeTodoTextInput"
+        name="changeTodoTextInput"
+        placeholder="Change your todo"
+        maxlength="80"
+        minlength="2"
+      />
+      <button onclick="handlers.changeTodo()">Change todo</button>
+    </div>
     <script src="script.js" async></script>
   </body>
 </html>
