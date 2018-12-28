@@ -4,7 +4,7 @@
 // [x] Add working UI for .addTodo
 // [x] Add working UI for .changeTodo
 // [x] Add working UI for .deleteTodo
-// [] Add working UI for .toggleCompleted
+// [x] Add working UI for .toggleCompleted
 // -------------------------------------
 
 // Store the todos array on an object
@@ -111,6 +111,16 @@ let handlers = {
     // Reset #changeTodoPositionInput and #changeTodoTextInput
     changeTodoPositionInput.value = ''
     changeTodoTextInput.value = ''
+  },
+  toggleCompleted () {
+    // Get position of array item from #toggleCompletedPositionInput
+    let toggleCompletedPositionInput = document.getElementById(
+      'toggleCompletedPositionInput'
+    )
+    // Toggle that todo
+    todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber)
+    // Reset #toggleCompletedPositionInput
+    toggleCompletedPositionInput.value = ''
   },
   deleteTodo () {
     // Get position of array item from #deleteTodoPositionInput
