@@ -1,26 +1,26 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V7 Requirements
-// [x] Add a 'display todos' button to the web interface.
-// [x] Add a 'toggle all' button to the web interface.
-// [x] Clicking 'display todos' calls todoList.displayTodos
-// [x] Clicking 'toggle all' calls todoList.toggleAll
+// V8 Requirements
+// [x] Add working UI for .addTodo
+// [x] Add working UI for .changeTodo
+// [x] Add working UI for .deleteTodo
+// [x] Add working UI for .toggleCompleted
 // -------------------------------------
 
 // Store the todos array on an object
 let todoList = {
   todos: [],
-  // displays todo information via object properties
+  // Display todo information via object properties
   // Refactored for ES6 method definition shorthand
   displayTodos () {
-    // shows if .todos is empty
+    // Show if .todos is empty
     if (this.todos.length === 0) {
       console.log(
         "Your todos list is empty. Try todoList.addTodo('first todo')"
       )
     } else {
-      // shows completed property status
-      // shows todoText property content
+      // Show completed property status
+      // Show todoText property content
       let todo = {}
       const incomplete = '[ ] '
       const complete = '[x] '
@@ -35,7 +35,7 @@ let todoList = {
       }
     }
   },
-  // adds todo objects
+  // Add todo objects
   addTodo (todoText) {
     this.todos.push({
       todoText: todoText,
@@ -43,18 +43,18 @@ let todoList = {
     })
     this.displayTodos()
   },
-  // changes the todoText property
-  changeTodo (arrayIndex, todoText) {
-    this.todos[arrayIndex].todoText = todoText
+  // Change the todoText property
+  changeTodo (position, todoText) {
+    this.todos[position].todoText = todoText
     this.displayTodos()
   },
-  // toggles the completed property
-  toggleCompleted (arrayIndex) {
-    let todo = this.todos[arrayIndex]
+  // Toggle the completed property
+  toggleCompleted (position) {
+    let todo = this.todos[position]
     todo.completed = !todo.completed
     this.displayTodos()
   },
-  // toggles the completed property of all todos - see logic below
+  // Toggle the completed property of all todos - see logic below
   toggleAll () {
     let totalTodos = this.todos.length
     let completedTodos = 0
@@ -79,27 +79,57 @@ let todoList = {
     }
     this.displayTodos()
   },
-  // deletes todo objects
-  deleteTodo (arrayIndex) {
-    this.todos.splice(arrayIndex, 1)
+  // Delete todo objects
+  deleteTodo (position) {
+    this.todos.splice(position, 1)
     this.displayTodos()
   }
 }
 
-// Get access to 'display todos' button
-const displayTodosButton = document.getElementById('displayTodosButton')
-
-// Call the displayTodos method when 'display todos' is clicked
-/*
-displayTodosButton.addEventListener('click', function () {
-  todoList.displayTodos()
-})
-*/
-// Refactored for ES6 arrow function expression
-displayTodosButton.addEventListener('click', () => todoList.displayTodos())
-
-// Get access to 'toggle todos' button
-const toggleAllButton = document.getElementById('toggleAllButton')
-
-// Call the toggleAll method when 'togggle all' is clicked
-toggleAllButton.addEventListener('click', () => todoList.toggleAll())
+// Create methods for inline HTML click events - cleaner than writing as eventListener callbacks
+let handlers = {
+  addTodo () {
+    // Get todo from #addTodoTextInput
+    let addTodoTextInput = document.getElementById('addTodoTextInput')
+    // Add todo to the list
+    todoList.addTodo(addTodoTextInput.value)
+    // Reset #addTodoTextInput
+    addTodoTextInput.value = ''
+  },
+  changeTodo () {
+    // Get position of array item from #changeTodoPositionInput
+    let changeTodoPositionInput = document.getElementById(
+      'changeTodoPositionInput'
+    )
+    // Get revised todo from #changeTodoTextInput
+    let changeTodoTextInput = document.getElementById('changeTodoTextInput')
+    // Change that todo
+    todoList.changeTodo(
+      changeTodoPositionInput.valueAsNumber,
+      changeTodoTextInput.value
+    )
+    // Reset #changeTodoPositionInput and #changeTodoTextInput
+    changeTodoPositionInput.value = ''
+    changeTodoTextInput.value = ''
+  },
+  toggleCompleted () {
+    // Get position of array item from #toggleCompletedPositionInput
+    let toggleCompletedPositionInput = document.getElementById(
+      'toggleCompletedPositionInput'
+    )
+    // Toggle that todo
+    todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber)
+    // Reset #toggleCompletedPositionInput
+    toggleCompletedPositionInput.value = ''
+  },
+  deleteTodo () {
+    // Get position of array item from #deleteTodoPositionInput
+    let deleteTodoPositionInput = document.getElementById(
+      'deleteTodoPositionInput'
+    )
+    // Delete that todo
+    todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber)
+    // Reset #deleteTodoPositionInput
+    deleteTodoPositionInput.value = ''
+  }
+}
