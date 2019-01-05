@@ -1,58 +1,29 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V8 Requirements
-// [x] Add working UI for .addTodo
-// [x] Add working UI for .changeTodo
-// [x] Add working UI for .deleteTodo
-// [x] Add working UI for .toggleCompleted
+// V9 Requirements
+// [x] Add an <li> element for every todo
+// [x] Each <li> displays .todoText
+// [x] Each <li> displays .completed status
 // -------------------------------------
 
-// Store the todos array on an object
 let todoList = {
+  // Store the todos in an array on an object
   todos: [],
-  // Display todo information via object properties
-  // Refactored for ES6 method definition shorthand
-  displayTodos () {
-    // Show if .todos is empty
-    if (this.todos.length === 0) {
-      console.log(
-        "Your todos list is empty. Try todoList.addTodo('first todo')"
-      )
-    } else {
-      // Show completed property status
-      // Show todoText property content
-      let todo = {}
-      const incomplete = '[ ] '
-      const complete = '[x] '
-      console.log('My todos')
-      for (let i = 0; i < this.todos.length; i++) {
-        todo = this.todos[i]
-        if (todo.completed === false) {
-          console.log(incomplete + todo.todoText)
-        } else {
-          console.log(complete + todo.todoText)
-        }
-      }
-    }
-  },
-  // Add todo objects
+  // Add todo objects to the todos array
   addTodo (todoText) {
     this.todos.push({
       todoText: todoText,
       completed: false
     })
-    this.displayTodos()
   },
   // Change the todoText property
   changeTodo (position, todoText) {
     this.todos[position].todoText = todoText
-    this.displayTodos()
   },
   // Toggle the completed property
   toggleCompleted (position) {
     let todo = this.todos[position]
     todo.completed = !todo.completed
-    this.displayTodos()
   },
   // Toggle the completed property of all todos - see logic below
   toggleAll () {
@@ -77,12 +48,12 @@ let todoList = {
         this.todos[i].completed = true
       }
     }
-    this.displayTodos()
+
+    view.displayTodos()
   },
   // Delete todo objects
   deleteTodo (position) {
     this.todos.splice(position, 1)
-    this.displayTodos()
   }
 }
 
@@ -95,6 +66,8 @@ let handlers = {
     todoList.addTodo(addTodoTextInput.value)
     // Reset #addTodoTextInput
     addTodoTextInput.value = ''
+
+    view.displayTodos()
   },
   changeTodo () {
     // Get position of array item from #changeTodoPositionInput
@@ -111,6 +84,8 @@ let handlers = {
     // Reset #changeTodoPositionInput and #changeTodoTextInput
     changeTodoPositionInput.value = ''
     changeTodoTextInput.value = ''
+
+    view.displayTodos()
   },
   toggleCompleted () {
     // Get position of array item from #toggleCompletedPositionInput
@@ -121,6 +96,8 @@ let handlers = {
     todoList.toggleCompleted(toggleCompletedPositionInput.valueAsNumber)
     // Reset #toggleCompletedPositionInput
     toggleCompletedPositionInput.value = ''
+
+    view.displayTodos()
   },
   deleteTodo () {
     // Get position of array item from #deleteTodoPositionInput
@@ -131,5 +108,32 @@ let handlers = {
     todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber)
     // Reset #deleteTodoPositionInput
     deleteTodoPositionInput.value = ''
+
+    view.displayTodos()
+  }
+}
+
+// Create methods for what displays as a result of user interactions - cleaner than writing as eventListener callbacks
+let view = {
+  // Display todos as a list in the frontend UI
+  displayTodos () {
+    const todosUl = document.querySelector('ul')
+    // Clear contents of UL prior to showing the current todos
+    todosUl.innerHTML = ''
+
+    // Set each list item's content to the todo's .completed and .todoText
+    for (let i = 0; i < todoList.todos.length; i++) {
+      // Create a list item for each todo
+      let todoLi = document.createElement('li')
+      let todo = todoList.todos[i]
+
+      if (todo.completed === true) {
+        todoLi.textContent = '[x] ' + todo.todoText
+      } else {
+        todoLi.textContent = '[ ] ' + todo.todoText
+      }
+
+      todosUl.appendChild(todoLi)
+    }
   }
 }
