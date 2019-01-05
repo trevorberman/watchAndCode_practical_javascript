@@ -135,6 +135,7 @@ let view = {
         todoLi.textContent = '[ ] ' + todo.todoText
       }
 
+      todoLi.appendChild(this.createDeleteButton())
       todosUl.appendChild(todoLi)
     }
   },
