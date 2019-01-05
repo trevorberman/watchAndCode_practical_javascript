@@ -1,9 +1,11 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V9 Requirements
-// [x] Add an <li> element for every todo
-// [x] Each <li> displays .todoText
-// [x] Each <li> displays .completed status
+// V10 Requirements
+// [x] Add a function for creating delete buttons
+// [] Add a delete button for each todo
+// [] Add todo array position to each <li> as an id=
+// [] Give delete buttons access to their associated todo id=
+// [] Integrate the above so deleting a todo updates todoList.todos and the DOM
 // -------------------------------------
 
 let todoList = {
@@ -135,5 +137,12 @@ let view = {
 
       todosUl.appendChild(todoLi)
     }
+  },
+  // Create individual delete buttons (for each todo)
+  createDeleteButton () {
+    const deleteButton = document.createElement('button')
+    deleteButton.textContent = 'Delete'
+    deleteButton.className = 'deleteButton'
+    return deleteButton
   }
 }
