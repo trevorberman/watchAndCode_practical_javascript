@@ -2,8 +2,8 @@
 
 // V10 Requirements
 // [x] Add a function for creating delete buttons
-// [] Add a delete button for each todo
-// [] Add todo array position to each <li> as an id=
+// [x] Add a delete button for each todo
+// [x] Add todo array position to each <li> as an id=
 // [] Give delete buttons access to their associated todo id=
 // [] Integrate the above so deleting a todo updates todoList.todos and the DOM
 // -------------------------------------
@@ -134,6 +134,9 @@ let view = {
       } else {
         todoLi.textContent = '[ ] ' + todo.todoText
       }
+
+      // Set todo id= array index
+      todoLi.id = i
 
       todoLi.appendChild(this.createDeleteButton())
       todosUl.appendChild(todoLi)
