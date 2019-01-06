@@ -1,10 +1,15 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V9 Requirements
-// [x] Add an <li> element for every todo
-// [x] Each <li> displays .todoText
-// [x] Each <li> displays .completed status
+// V10 Requirements
+// [x] Add a function for creating delete buttons
+// [x] Add a delete button for each todo
+// [x] Add todo array position to each <li> as an id=
+// [x] Give delete buttons access to their associated todo id=
+// [x] Integrate the above so deleting a todo updates todoList.todos and the DOM
 // -------------------------------------
+
+// Set global variable for DOM todo list
+const todosUl = document.querySelector('ul')
 
 let todoList = {
   // Store the todos in an array on an object
@@ -99,15 +104,9 @@ let handlers = {
 
     view.displayTodos()
   },
-  deleteTodo () {
-    // Get position of array item from #deleteTodoPositionInput
-    let deleteTodoPositionInput = document.getElementById(
-      'deleteTodoPositionInput'
-    )
+  deleteTodo (position) {
     // Delete that todo
-    todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber)
-    // Reset #deleteTodoPositionInput
-    deleteTodoPositionInput.value = ''
+    todoList.deleteTodo(position)
 
     view.displayTodos()
   }
@@ -117,23 +116,48 @@ let handlers = {
 let view = {
   // Display todos as a list in the frontend UI
   displayTodos () {
-    const todosUl = document.querySelector('ul')
     // Clear contents of UL prior to showing the current todos
     todosUl.innerHTML = ''
 
-    // Set each list item's content to the todo's .completed and .todoText
+    // Set each list item's content
     for (let i = 0; i < todoList.todos.length; i++) {
       // Create a list item for each todo
       let todoLi = document.createElement('li')
       let todo = todoList.todos[i]
 
+      // Add the todo's .completed status and .todoText
       if (todo.completed === true) {
         todoLi.textContent = '[x] ' + todo.todoText
       } else {
         todoLi.textContent = '[ ] ' + todo.todoText
       }
 
+      // Set todo id= array index
+      todoLi.id = i
+
+      // Add the todo content to the DOM
+      todoLi.appendChild(this.createDeleteButton())
       todosUl.appendChild(todoLi)
     }
+  },
+  // Create individual delete buttons (for each todo)
+  createDeleteButton () {
+    const deleteButton = document.createElement('button')
+    deleteButton.textContent = 'Delete'
+    deleteButton.className = 'deleteButton'
+    return deleteButton
+  },
+  setupEventListeners () {
+    // Give delete buttons access to their associated todo id=
+    todosUl.addEventListener('click', event => {
+      let elementClicked = event.target
+
+      // Check if elementClicked is a delete buttton
+      if (elementClicked.className === 'deleteButton') {
+        handlers.deleteTodo(parseInt(elementClicked.parentNode.id))
+      }
+    })
   }
 }
+
+view.setupEventListeners()
