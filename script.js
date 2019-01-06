@@ -4,8 +4,8 @@
 // [x] Add a function for creating delete buttons
 // [x] Add a delete button for each todo
 // [x] Add todo array position to each <li> as an id=
-// [] Give delete buttons access to their associated todo id=
-// [] Integrate the above so deleting a todo updates todoList.todos and the DOM
+// [x] Give delete buttons access to their associated todo id=
+// [x] Integrate the above so deleting a todo updates todoList.todos and the DOM
 // -------------------------------------
 
 // Set global variable for DOM todo list
