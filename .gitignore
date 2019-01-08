@@ -60,6 +60,9 @@ Temporary Items
 *.sql
 *.sqlite
 
+# Project specific #
+####################
+project_workflow_notes.md
 
 # -------------------------
 # BEGIN Whitelisted Files
