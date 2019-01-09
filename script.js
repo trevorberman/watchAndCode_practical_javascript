@@ -2,7 +2,7 @@
 
 // V11 Requirements
 // [x] Use forEach instead of a for loop in todoList.toggleAll
-// [] Use forEach instead of a for loop in view.displayTodos
+// [x] Use forEach instead of a for loop in view.displayTodos
 // -------------------------------------
 
 // Set global variable for DOM todo list
@@ -38,18 +38,6 @@ let todoList = {
         completedTodos++
       }
     })
-
-    // // If all todos are true, make them all false
-    // if (completedTodos === totalTodos) {
-    //   this.todos.forEach(todo => {
-    //     todo.completed = false
-    //   })
-    // } else {
-    //   // Otherwise, make all todos true
-    //   this.todos.forEach(todo => {
-    //     todo.completed = true
-    //   })
-    // }
 
     this.todos.forEach(todo => {
       // If all todos are true, make them all false
@@ -127,10 +115,9 @@ let view = {
     todosUl.innerHTML = ''
 
     // Set each list item's content
-    for (let i = 0; i < todoList.todos.length; i++) {
+    todoList.todos.forEach((todo, position) => {
       // Create a list item for each todo
       let todoLi = document.createElement('li')
-      let todo = todoList.todos[i]
 
       // Add the todo's .completed status and .todoText
       if (todo.completed === true) {
@@ -140,12 +127,12 @@ let view = {
       }
 
       // Set todo id= array index
-      todoLi.id = i
+      todoLi.id = position
 
       // Add the todo content to the DOM
-      todoLi.appendChild(this.createDeleteButton())
+      todoLi.appendChild(view.createDeleteButton())
       todosUl.appendChild(todoLi)
-    }
+    })
   },
   // Create individual delete buttons (for each todo)
   createDeleteButton () {
