@@ -39,17 +39,27 @@ let todoList = {
       }
     })
 
-    // If all todos are true, make them all false
-    if (completedTodos === totalTodos) {
-      this.todos.forEach(todo => {
+    // // If all todos are true, make them all false
+    // if (completedTodos === totalTodos) {
+    //   this.todos.forEach(todo => {
+    //     todo.completed = false
+    //   })
+    // } else {
+    //   // Otherwise, make all todos true
+    //   this.todos.forEach(todo => {
+    //     todo.completed = true
+    //   })
+    // }
+
+    this.todos.forEach(todo => {
+      // If all todos are true, make them all false
+      if (completedTodos === totalTodos) {
         todo.completed = false
-      })
-    } else {
-      // Otherwise, make all todos true
-      this.todos.forEach(todo => {
+      } else {
+        // Otherwise, make all todos true
         todo.completed = true
-      })
-    }
+      }
+    })
 
     view.displayTodos()
   },
