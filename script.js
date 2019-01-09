@@ -1,7 +1,7 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
 // V11 Requirements
-// [] Use forEach instead of a for loop in todoList.toggleAll
+// [x] Use forEach instead of a for loop in todoList.toggleAll
 // [] Use forEach instead of a for loop in view.displayTodos
 // -------------------------------------
 
@@ -33,22 +33,22 @@ let todoList = {
     let completedTodos = 0
 
     // Get number of completed todos
-    for (let i = 0; i < totalTodos; i++) {
-      if (this.todos[i].completed === true) {
+    this.todos.forEach(todo => {
+      if (todo.completed === true) {
         completedTodos++
       }
-    }
+    })
 
     // If all todos are true, make them all false
     if (completedTodos === totalTodos) {
-      for (let i = 0; i < totalTodos; i++) {
-        this.todos[i].completed = false
-      }
+      this.todos.forEach(todo => {
+        todo.completed = false
+      })
     } else {
       // Otherwise, make all todos true
-      for (let i = 0; i < totalTodos; i++) {
-        this.todos[i].completed = true
-      }
+      this.todos.forEach(todo => {
+        todo.completed = true
+      })
     }
 
     view.displayTodos()
