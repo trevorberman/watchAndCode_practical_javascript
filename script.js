@@ -1,11 +1,8 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V10 Requirements
-// [x] Add a function for creating delete buttons
-// [x] Add a delete button for each todo
-// [x] Add todo array position to each <li> as an id=
-// [x] Give delete buttons access to their associated todo id=
-// [x] Integrate the above so deleting a todo updates todoList.todos and the DOM
+// V11 Requirements
+// [] Use forEach instead of a for loop in todoList.toggleAll
+// [] Use forEach instead of a for loop in view.displayTodos
 // -------------------------------------
 
 // Set global variable for DOM todo list
