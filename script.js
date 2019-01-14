@@ -1,11 +1,8 @@
 // Watch and Code Practical Javascript - Todo List Build and Learn
 
-// V10 Requirements
-// [x] Add a function for creating delete buttons
-// [x] Add a delete button for each todo
-// [x] Add todo array position to each <li> as an id=
-// [x] Give delete buttons access to their associated todo id=
-// [x] Integrate the above so deleting a todo updates todoList.todos and the DOM
+// V11 Requirements
+// [x] Use forEach instead of a for loop in todoList.toggleAll
+// [x] Use forEach instead of a for loop in view.displayTodos
 // -------------------------------------
 
 // Set global variable for DOM todo list
@@ -36,23 +33,21 @@ let todoList = {
     let completedTodos = 0
 
     // Get number of completed todos
-    for (let i = 0; i < totalTodos; i++) {
-      if (this.todos[i].completed === true) {
+    this.todos.forEach(todo => {
+      if (todo.completed === true) {
         completedTodos++
       }
-    }
+    })
 
-    // If all todos are true, make them all false
-    if (completedTodos === totalTodos) {
-      for (let i = 0; i < totalTodos; i++) {
-        this.todos[i].completed = false
+    this.todos.forEach(todo => {
+      // If all todos are true, make them all false
+      if (completedTodos === totalTodos) {
+        todo.completed = false
+      } else {
+        // Otherwise, make all todos true
+        todo.completed = true
       }
-    } else {
-      // Otherwise, make all todos true
-      for (let i = 0; i < totalTodos; i++) {
-        this.todos[i].completed = true
-      }
-    }
+    })
 
     view.displayTodos()
   },
@@ -120,10 +115,9 @@ let view = {
     todosUl.innerHTML = ''
 
     // Set each list item's content
-    for (let i = 0; i < todoList.todos.length; i++) {
+    todoList.todos.forEach((todo, position) => {
       // Create a list item for each todo
       let todoLi = document.createElement('li')
-      let todo = todoList.todos[i]
 
       // Add the todo's .completed status and .todoText
       if (todo.completed === true) {
@@ -133,12 +127,12 @@ let view = {
       }
 
       // Set todo id= array index
-      todoLi.id = i
+      todoLi.id = position
 
       // Add the todo content to the DOM
-      todoLi.appendChild(this.createDeleteButton())
+      todoLi.appendChild(view.createDeleteButton())
       todosUl.appendChild(todoLi)
-    }
+    })
   },
   // Create individual delete buttons (for each todo)
   createDeleteButton () {
